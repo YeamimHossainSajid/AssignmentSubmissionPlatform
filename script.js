@@ -38,7 +38,6 @@ const Store = {
         }
     }
 };
-
 const Auth = {
     login(email, password) {
         const users = Store.get('users');
@@ -69,7 +68,6 @@ const Auth = {
         return true;
     }
 };
-
 const UI = {
     notify(msg, type = 'info') {
         const container = document.getElementById('toast-container');
@@ -96,17 +94,14 @@ const UI = {
         document.getElementById('modal-overlay').style.display = 'none';
     }
 };
-
 const Router = {
     navigate(view) {
         const container = document.getElementById('main-content');
         const title = document.getElementById('view-title');
         title.innerText = view.charAt(0).toUpperCase() + view.slice(1);
-        
         document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
         const activeNav = document.querySelector(`[onclick*="${view}"]`);
         if (activeNav) activeNav.classList.add('active');
-
         switch(view) {
             case 'dashboard': Views.dashboard(container); break;
             case 'users': Views.users(container); break;
@@ -118,7 +113,6 @@ const Router = {
         }
     }
 };
-
 const Views = {
     dashboard(container) {
         const user = Store.getCurrentUser();
@@ -174,7 +168,6 @@ const Views = {
         const courses = Store.get('courses');
         const enrollments = Store.get('enrollments').filter(e => e.studentId === user.id);
         const myCourses = courses.filter(c => enrollments.some(e => e.courseId === c.id));
-        
         container.innerHTML = `
             <h1>My Courses</h1>
             <div class="stats-grid" style="margin-top:20px">
@@ -238,7 +231,6 @@ const Views = {
         `, '<button class="btn btn-primary" onclick="UI.closeModal()">Submit</button>');
     }
 };
-
 const App = {
     init() {
         Store.seed();
@@ -282,5 +274,4 @@ const App = {
         `;
     }
 };
-
 document.addEventListener('DOMContentLoaded', () => App.init());

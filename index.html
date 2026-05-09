@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LASS | Student Assignment Submission System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=JetBrains+Mono&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="toast-container"></div>
+    <div id="modal-overlay">
+        <div class="modal" id="modal-container"></div>
+    </div>
+    <div id="auth-container"></div>
+    <div id="app-shell">
+        <header id="topbar">
+            <div class="logo">
+                <div class="logo-box">L</div>
+                LASS
+            </div>
+            <div id="view-title">Dashboard</div>
+            <div class="topbar-right">
+                <div id="user-info">
+                    <div id="user-name"></div>
+                    <div id="user-role"></div>
+                </div>
+                <div id="user-avatar"></div>
+            </div>
+        </header>
+        <aside id="sidebar">
+            <div id="nav-links"></div>
+            <div class="sidebar-footer">
+                <button class="btn btn-secondary" onclick="Auth.logout()">Logout</button>
+            </div>
+        </aside>
+        <main id="main-content"></main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

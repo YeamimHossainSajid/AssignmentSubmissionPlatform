@@ -4,18 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LASS | Student Assignment Submission System</title>
+    <meta name="description" content="LASS — a Learning & Assignment Submission System connecting students, instructors, and admins.">
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=JetBrains+Mono&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+    <!-- Toast notifications -->
     <div id="toast-container"></div>
+
+    <!-- Modal overlay -->
     <div id="modal-overlay">
         <div class="modal" id="modal-container"></div>
     </div>
+
+    <!-- Auth screen (login / register) -->
     <div id="auth-container"></div>
-    <div id="app-shell">
+
+    <!-- Main app shell (hidden until logged in) -->
+    <div id="app-shell" style="display:none">
         <header id="topbar">
             <div class="logo">
                 <div class="logo-box">L</div>
@@ -30,18 +42,23 @@
                 <div id="user-avatar"></div>
             </div>
         </header>
+
         <aside id="sidebar">
             <div id="nav-links"></div>
             <div class="sidebar-footer">
-                <button class="btn btn-secondary" onclick="Auth.logout()">Logout</button>
+                <button class="btn btn-secondary" onclick="window.__logout()">Logout</button>
             </div>
         </aside>
+
         <main id="main-content">
-
-
-            <p class="welcome-message">Welcome to LASS - Student Assignment Submission System</p>   
+            <div class="empty-state">
+                <div class="spinner"></div>
+                <p>Loading…</p>
+            </div>
         </main>
     </div>
-    <script src="script.js"></script>
+
+    <!-- ES Module entry point -->
+    <script type="module" src="js/app.js"></script>
 </body>
 </html>

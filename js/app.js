@@ -111,6 +111,7 @@ function showRegister() {
                     <select id="reg-role" style="margin-bottom:20px">
                         <option value="STUDENT">Student</option>
                         <option value="INSTRUCTOR">Instructor</option>
+                        <option value="ADMIN">Admin</option>
                     </select>
                 </div>
                 <button class="btn btn-primary" id="reg-btn" style="width:100%;margin-bottom:14px" onclick="window.__doRegister()">Register</button>

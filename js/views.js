@@ -153,17 +153,40 @@ export const Views = {
 
     /* ══════════════════ ALL COURSES (Admin / browsing) ══════════════════ */
     async courses(container) {
+        const session = Auth.getSession();
+        const role = session ? session.role.toLowerCase() : '';
         try {
             const courses = await Api.getAllCourses();
             container.innerHTML = `
-                <h1>All Courses</h1>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+                    <h1>All Courses</h1>
+                    ${role === 'admin' ? `<button class="btn btn-primary" onclick="window.__Views.openCreateCourseModal()">+ Create Course</button>` : ''}
+                </div>
                 ${courses.length === 0 ? UI.emptyState('📭', 'No courses found.') : `
                 <div class="course-grid">
-                    ${courses.map(c => courseCard(c)).join('')}
+                    ${courses.map(c => {
+                        const footer = role === 'admin'
+                            ? `<button class="btn btn-danger" style="width:100%" onclick="window.__Views.doDeleteCourse('${c.id}', '${(c.title || '').replace(/'/g, "\\'")}')">Delete Course</button>`
+                            : '';
+                        return courseCard(c, footer);
+                    }).join('')}
                 </div>`}
             `;
         } catch (err) {
             container.innerHTML = UI.emptyState('⚠️', err.message);
+        }
+    },
+
+    async doDeleteCourse(courseId, title) {
+        if (!confirm(`Are you sure you want to delete the course "${title}"? This will also delete all associated assignments and student submissions.`)) {
+            return;
+        }
+        try {
+            await Api.deleteCourse(courseId);
+            UI.notify('Course deleted successfully!', 'success');
+            Router.navigate('courses');
+        } catch (err) {
+            UI.notify(err.message, 'error');
         }
     },
 
@@ -535,7 +558,12 @@ export const Views = {
             await Api.createCourse({ title, description: desc });
             UI.closeModal();
             UI.notify('Course created!', 'success');
-            Router.navigate('my-courses');
+            const session = Auth.getSession();
+            if (session && session.role.toLowerCase() === 'admin') {
+                Router.navigate('courses');
+            } else {
+                Router.navigate('my-courses');
+            }
         } catch (err) {
             UI.notify(err.message, 'error');
             UI.setLoading(btn, false);

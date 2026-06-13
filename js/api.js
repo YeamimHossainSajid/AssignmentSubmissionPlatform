@@ -53,6 +53,7 @@ export const Api = {
     getEnrolledCourses: ()          => Api.get('/api/courses/enrolled'),
     getTeachingCourses: ()          => Api.get('/api/courses/teaching'),
     createCourse:      (data)       => Api.post('/api/courses', data),
+    deleteCourse:      (courseId)   => Api.delete(`/api/courses/${courseId}`),
     enrollInCourse:    (courseId)   => Api.post(`/api/courses/${courseId}/enroll`),
 
     // Assignments

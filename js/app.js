@@ -26,6 +26,7 @@ const NAV_LINKS = {
     ],
     STUDENT: [
         { view: 'dashboard',   label: '🏠 Dashboard' },
+        { view: 'courses',     label: '📚 All Courses' },
         { view: 'my-courses',  label: '📖 My Courses' },
         { view: 'enroll',      label: '🔍 Browse Courses' },
         { view: 'assignments', label: '📝 Assignments' },
